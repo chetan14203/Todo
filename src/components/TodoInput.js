@@ -1,10 +1,11 @@
 import React from "react";
+import { setStorage } from "./localStorage";
 
 const TodoInput = ({ input, setInput, task, setTask }) => {
 
     const handleSubmit = (event) => {
     event.preventDefault();
-    if(input.content==="") return;
+    if(!input.content) return;
     if(task.find((elem)=>elem.content===input.content)){
         setInput("")
         return;
@@ -17,12 +18,13 @@ const TodoInput = ({ input, setInput, task, setTask }) => {
             ...prev,id:event.target.value,content:event.target.value
         }))
     }
+    setStorage(task);
   return (
     <form className="container mx-auto w-50 py-5" onSubmit={handleSubmit}>
-      <div class="input-group mb-3">
+      <div className="input-group mb-3">
         <input
           type="text"
-          class="form-control"
+          className="form-control"
           value={input.content}
           onChange={handleChange}
           placeholder="Add Task"
